@@ -4,8 +4,9 @@ import Parser
 
 main :: IO ()
 main =
-  let input = "(\\x -> x) y"
-      tokens = tokenize input
+  let input = "\\x -> x \\x -> x"
+      parsed = parse input
    in do
         putStrLn "Hello, Haskell!"
-        print tokens
+        print parsed
+        putStrLn "Done!"
