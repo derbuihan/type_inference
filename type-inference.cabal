@@ -67,7 +67,7 @@ library
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.18.3.0
+    build-depends:    base >=4.18 && <5
 
     -- Directories containing source files.
     hs-source-dirs:   src
@@ -90,7 +90,7 @@ executable type-inference
 
     -- Other library packages from which modules are imported.
     build-depends:
-        base ^>=4.18.3.0,
+        base >=4.18 && <5,
         type-inference
 
     -- Directories containing source files.
@@ -123,5 +123,5 @@ test-suite type-inference-test
 
     -- Test dependencies.
     build-depends:
-        base ^>=4.18.3.0,
+        base >=4.18 && <5,
         type-inference
