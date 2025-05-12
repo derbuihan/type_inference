@@ -1,4 +1,4 @@
-module SimplyTyped where
+module Types where
 
 import Data.Map
 
@@ -17,4 +17,11 @@ data Type
 
 type TypeEnv = Map String Type
 
-typeenv = fromList [("x", TVar "a"), ("y", TVar "b")]
+data Token
+  = TokenStr String -- x, y, etc.
+  | TokenLam -- \
+  | TokenLParen -- (
+  | TokenRParen -- )
+  | TokenArrow -- ->
+  | TokenEOF -- end of file
+  deriving (Show, Eq)

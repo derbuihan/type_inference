@@ -1,7 +1,11 @@
 module Main where
 
-import SimplyTyped
+import Parser
 
 main :: IO ()
-main = do
-  putStrLn "Hello, Haskell!"
+main =
+  let input = "(\\x -> x) y"
+      tokens = tokenize input
+   in do
+        putStrLn "Hello, Haskell!"
+        print tokens
