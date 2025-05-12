@@ -1,8 +1,7 @@
 module Main where
 
-import qualified SimplyTyped (someFunc)
+import SimplyTyped
 
 main :: IO ()
 main = do
   putStrLn "Hello, Haskell!"
-  SimplyTyped.someFunc
