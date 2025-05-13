@@ -4,14 +4,13 @@ import Data.Map
 
 data Expr
   = Var String
-  | Lam String Expr
+  | Lam String Type Expr
   | App Expr Expr
   deriving (Show, Eq)
 
 data Type
   = TInt
   | TBool
-  | TVar String
   | TFun Type Type
   deriving (Show, Eq)
 
@@ -20,8 +19,12 @@ type TypeEnv = Map String Type
 data Token
   = TokenStr String -- x, y, etc.
   | TokenLam -- \
-  | TokenDot -- .
   | TokenLParen -- (
   | TokenRParen -- )
+  | TokenColon -- :
+  | TokenDot -- .
+  | TokenArrow -- ->
+  | TokenTInt -- Int
+  | TokenTBool -- Bool
   | TokenEOF -- end of file
   deriving (Show, Eq)

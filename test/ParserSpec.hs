@@ -11,34 +11,34 @@ spec = do
 
 specTokenize :: Spec
 specTokenize = do
-  it "tokenize (\\x . x) y" $ do
-    let input = "(\\x . x) y"
+  it "tokenize (\\x : Int . x) y" $ do
+    let input = "(\\x : Int . x) y"
         actual = tokenize input
-        expected = [TokenLParen, TokenLam, TokenStr "x", TokenDot, TokenStr "x", TokenRParen, TokenStr "y", TokenEOF]
+        expected = [TokenLParen, TokenLam, TokenStr "x", TokenColon, TokenTInt, TokenDot, TokenStr "x", TokenRParen, TokenStr "y", TokenEOF]
     actual `shouldBe` expected
 
 specParse :: Spec
 specParse = do
-  it "parse (\\x . x) y" $ do
-    let input = "(\\x . x) y"
+  it "parse (\\x : Int . x) y" $ do
+    let input = "(\\x : Int . x) y"
         actual = parse input
-        expected = App (Lam "x" (Var "x")) (Var "y")
+        expected = App (Lam "x" TInt (Var "x")) (Var "y")
     actual `shouldBe` expected
 
-  it "parse \\x . \\y . x y" $ do
-    let input = "\\x . \\y . x y"
+  it "parse \\x  : Int . \\y  : Int . x y" $ do
+    let input = "\\x : Int . \\y : Int . x y"
         actual = parse input
-        expected = Lam "x" (Lam "y" (App (Var "x") (Var "y")))
+        expected = Lam "x" TInt (Lam "y" TInt (App (Var "x") (Var "y")))
     actual `shouldBe` expected
 
-  it "parse \\x . x \\y . y" $ do
-    let input = "\\x . x \\y . y"
+  it "parse \\x : Int . x \\y : Int . y" $ do
+    let input = "\\x : Int . x \\y : Int . y"
         actual = parse input
-        expected = Lam "x" (App (Var "x") (Lam "y" (Var "y")))
+        expected = Lam "x" TInt (App (Var "x") (Lam "y" TInt (Var "y")))
     actual `shouldBe` expected
 
-  it "parse (\\x . x) (\\y . y)" $ do
-    let input = "(\\x . x) (\\y . y)"
+  it "parse (\\x : Int . x) (\\y : Int . y)" $ do
+    let input = "(\\x : Int . x) (\\y : Int . y)"
         actual = parse input
-        expected = App (Lam "x" (Var "x")) (Lam "y" (Var "y"))
+        expected = App (Lam "x" TInt (Var "x")) (Lam "y" TInt (Var "y"))
     actual `shouldBe` expected
