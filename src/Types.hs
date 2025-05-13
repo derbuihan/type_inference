@@ -20,8 +20,8 @@ type TypeEnv = Map String Type
 data Token
   = TokenStr String -- x, y, etc.
   | TokenLam -- \
+  | TokenDot -- .
   | TokenLParen -- (
   | TokenRParen -- )
-  | TokenArrow -- ->
   | TokenEOF -- end of file
   deriving (Show, Eq)

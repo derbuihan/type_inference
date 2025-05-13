@@ -13,7 +13,7 @@ tokenize (' ' : xs) = tokenize xs
 tokenize ('\\' : xs) = TokenLam : tokenize xs
 tokenize ('(' : xs) = TokenLParen : tokenize xs
 tokenize (')' : xs) = TokenRParen : tokenize xs
-tokenize ('-' : '>' : xs) = TokenArrow : tokenize xs
+tokenize ('.' : xs) = TokenDot : tokenize xs
 tokenize (x : xs)
   | isAlpha x =
       let (keyword, rest) = span isAlphaNum (x : xs)
@@ -49,7 +49,7 @@ parseAppChain left tokens =
     _ -> (left, tokens)
 
 parseLam :: Parser Expr
-parseLam (TokenLam : TokenStr var : TokenArrow : rest) =
+parseLam (TokenLam : TokenStr var : TokenDot : rest) =
   let (body, rest_) = parse_ rest
    in (Lam var body, rest_)
 parseLam tokens = parseParen tokens
