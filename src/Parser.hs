@@ -83,9 +83,9 @@ parseType :: Parser Type
 parseType tokens =
   let (type1, rest) = parseTypeParen tokens
    in case rest of
-        (TokenArrow : _) ->
-          let (type2, rest_) = parseType rest
-           in (TFun type1 type2, rest_)
+        (TokenArrow : rest_) ->
+          let (type2, rest__) = parseType rest_
+           in (TFun type1 type2, rest__)
         _ -> (type1, rest)
 
 parseTypeParen :: Parser Type

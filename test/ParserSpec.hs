@@ -42,3 +42,9 @@ specParse = do
         actual = parse input
         expected = App (Lam "x" TInt (Var "x")) (Lam "y" TInt (Var "y"))
     actual `shouldBe` expected
+
+  it "parse \\x : Int -> Int . x" $ do
+    let input = "\\x : Int -> Int . x"
+        actual = parse input
+        expected = Lam "x" (TFun TInt TInt) (Var "x")
+    actual `shouldBe` expected

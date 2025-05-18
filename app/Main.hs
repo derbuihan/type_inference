@@ -6,7 +6,7 @@ import Types
 
 main :: IO ()
 main =
-  let input = "(\\x: Int . x) y"
+  let input = "\\x: Int -> Int. x"
       parsed = parse input
       env = fromList [("y", TInt)]
       typed = infer env parsed

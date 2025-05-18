@@ -28,3 +28,9 @@ specInference = do
         actual = infer (fromList [("y", TInt)]) (parse input)
         expected = TInt
     actual `shouldBe` expected
+
+  it "infer (\\x : Int -> Int . x) y" $ do
+    let input = "(\\x : Int -> Int . x) y"
+        actual = infer (fromList [("y", TFun TInt TInt)]) (parse input)
+        expected = TFun TInt TInt
+    actual `shouldBe` expected
