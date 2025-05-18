@@ -1,7 +1,5 @@
 module Types where
 
-import Data.Map
-
 data Expr
   = Var String
   | Lam String Type Expr
@@ -13,8 +11,6 @@ data Type
   | TBool
   | TFun Type Type
   deriving (Show, Eq)
-
-type TypeEnv = Map String Type
 
 data Token
   = TokenStr String -- x, y, etc.
